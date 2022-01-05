@@ -555,7 +555,7 @@ func (s *Server) Ask(ctx context.Context, msg Message) (Message, error) {
 		return s.StackExchange.Ask(ctx, msg, msg.wait)
 	}
 
-	ch := make(chan Message)
+	ch := make(chan Message, 1)
 	s.waitingMessagesMutex.Lock()
 	s.waitingMessages[msg.wait] = ch
 	s.waitingMessagesMutex.Unlock()
